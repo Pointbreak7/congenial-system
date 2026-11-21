@@ -1,0 +1,310 @@
+
+########## 1  Sorting & searching ##########
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+200 event records.  Arrival order (first 3):
+   1628  web       login-fail   severity 3
+   2044  siem      login-fail   severity 3
+   1716  web       login-fail   severity 3
+after sorting by time (first 3):
+   0005  web       malware      severity 4
+   0007  backup    login-ok     severity 1
+   0038  siem      login-fail   severity 2
+merge and quick sort agree : yes
+search time 1224 : iterative index 100, recursive index 100
+search time 2475 : index -1 (not a real time)
+time index         : 56 events between 0900 and 1700
+host index (events per host):
+   gateway   39
+   firewall  25
+   web       38
+   database  23
+   siem      40
+   backup    35
+severity index     : sev1=87 sev2=28 sev3=50 sev4=10 sev5=25
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+
+########## 2  Divide & conquer ##########
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+hourly risk change: 1 1 5 -6 6 6 -2 4 -2 1 0 -1 -1 5 -2 2 4 19 0 -2 14 5 -4 5
+worst stretch of hours (max subarray): 58
+log shipping key exchange (Diffie-Hellman p=23 g=5): public 8 and 19, shared secret 2 = 2
+log collector (celebrity) among 6 hosts: siem
+128x128 matrix product: classical 0.53 ms, Strassen 0.87 ms, same answer: yes
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+
+########## 3  Greedy ##########
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+investigation jobs (15 min x severity each): 35
+one analyst can run 13 of them (start times: 00:05 01:37 04:16 05:32 07:25 09:25 11:14 13:10 ...)
+analysts needed to run all 35 at once: 6
+Huffman for event types (200 events): 407 bits vs 600 fixed-length
+   login-ok     count  87 code 0
+   login-fail   count  54 code 10
+   port-scan    count  24 code 110
+   malware      count  21 code 1111
+   exfiltration count  14 code 1110
+easiest attack path internet-facing gateway -> database: effort 8, path gateway -> web -> firewall -> database
+easiest attack path gateway -> backup: effort 13, path gateway -> web -> firewall -> database -> siem -> backup
+cheapest cabling that links everything: Prim 13, Kruskal 13
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+
+########## 4  Dynamic programming ##########
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+containment actions: 12 (a patch and a DLP rule per host), total cost 82 h, budget 41 h
+   best risk removed: DP 374 (greedy gets 354).  Chosen plan:
+   patch gateway   cost  6 h, risk removed 84
+   patch firewall  cost  8 h, risk removed 56
+   DLP   firewall  cost  5 h, risk removed 40
+   DLP   database  cost  9 h, risk removed 50
+   DLP   siem      cost  5 h, risk removed 80
+   patch backup    cost  5 h, risk removed 44
+   DLP   backup    cost  3 h, risk removed 20
+matrix chain: 15125 multiplications, order ((A1 x (A2 x A3)) x ((A4 x A5) x A6))
+LCS of attack traces ABCBDAB / BDCABA: length 4 (BCBA)
+optimal BST over the 6 hosts, searched as often as they appear in the logs: cost 445
+Bellman-Ford with a negative edge: dist to 1 = 2, negative cycle: no
+Floyd-Warshall says dist 0 -> 1 = 2
+shortest patrol tour over 4 sites (TSP): 80
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+
+########## 5  Flow & matching ##########
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+max traffic internet -> backup: 23 Mbps
+analysts matched to incident types: 3 of 3
+   incident 0 -> analyst 1
+   incident 1 -> analyst 0
+   incident 2 -> analyst 2
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+
+########## 6  Signature matching ##########
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+CRT: three alerts fire every 3, 5, 7 days (offsets 2,3,2): all coincide on day 23, repeating every 105 days
+
+event sequences: each host's events as letters (L login-ok, F login-fail, S scan, M malware, X exfiltration)
+   brute-force         FFF  naive 4, Rabin-Karp 4, automaton 4, KMP 4  (comparisons: naive 254, KMP 250)
+   scan-then-malware   SM   naive 3, Rabin-Karp 3, automaton 3, KMP 3  (comparisons: naive 217, KMP 220)
+   malware-then-exfil  MX   naive 3, Rabin-Karp 3, automaton 3, KMP 3  (comparisons: naive 213, KMP 216)
+   full-kill-chain     SMX  naive 1, Rabin-Karp 1, automaton 1, KMP 1  (comparisons: naive 214, KMP 222)
+correlated incidents raised as alerts (first 8):
+   1114  gateway   scan-then-malware   severity 4
+   0534  firewall  malware-then-exfil  severity 5
+   0238  web       brute-force         severity 3
+   0246  web       brute-force         severity 3
+   0755  database  scan-then-malware   severity 4
+   0925  database  malware-then-exfil  severity 5
+   0925  database  full-kill-chain     severity 5
+   0115  siem      brute-force         severity 3
+
+signature in a web request: naive 2, Rabin-Karp 2, automaton 2, KMP 2
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+
+########## 7  Three scenarios ##########
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+
+=== Scenario 1: normal operation ===
+200 events sorted two ways, identical: yes
+alerts raised: 35 high-severity + 11 correlated incidents
+shortest paths from gateway, Dijkstra vs Bellman-Ford:
+   gateway   0 vs 0
+   firewall  3 vs 3
+   web       2 vs 2
+   database  8 vs 8
+   siem      10 vs 10
+   backup    13 vs 13
+
+=== Scenario 2: capacity shock ===
+link capacities normal : max flow 23 Mbps
+database uplink cut 20 -> 8: max flow 12 Mbps
+containment budget 41 h: DP value 374, greedy value 354
+containment budget 20 h: DP value 238, greedy value 238
+
+=== Scenario 3: large-data stress ===
+sort 100000 numbers: merge 8.5 ms, quick 6.0 ms, same result: yes
+sort 100000 event records: merge 12.8 ms, quick 10.6 ms, same result: yes
+worst-case signature scan over 300000 chars: naive 34.1 ms (90209700 comparisons), KMP 1.4 ms (599700), matches 0 / 0
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+
+########## L  Load sample log file ##########
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+file path (each line: "time host type severity", or just "time"): loaded 197 valid events, rejected 8 invalid lines
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+validation rules: time is a real HHMM (hour 0-23, minute 0-59); host 0-5; type 0-4; severity 1-5
+
+   time   930 host  1 type  2 sev  3  ->  ACCEPT
+   time  2475 host  1 type  2 sev  3  ->  REJECT (time is not a valid HHMM)
+   time  1200 host  9 type  1 sev  2  ->  REJECT (unknown host)
+   time  1500 host  2 type  7 sev  1  ->  REJECT (unknown event type)
+   time   800 host  0 type  0 sev  0  ->  REJECT (severity outside 1..5)
+   time   960 host  3 type  1 sev  2  ->  REJECT (time is not a valid HHMM)
+   time  2359 host  5 type  4 sev  5  ->  ACCEPT
+   time   -15 host  0 type  0 sev  1  ->  REJECT (time is not a valid HHMM)
+test batch: 2 accepted, 6 rejected
+
+current dataset (197 events):
+service indicators:
+   events accepted / rejected     : 197 / 8  (acceptance 96.1%)
+   high-severity alerts           : 44  (27 critical, 1.83 per hour)
+   correlated incidents (patterns): 11
+   busiest host                   : siem with 38 events (19.3% of all)
+   peak alert hour                : 21:00 with 7 alerts
+   risk coverage at budget 41 h    : 506 of 721 (70.2%)
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+
+########## T  Self-tests ##########
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+tests passed: 182, failed: 0
+
+==== Security Analytics Engine ====
+ 1 Sorting & searching        5 Flow & matching
+ 2 Divide & conquer           6 Signature matching
+ 3 Greedy                     7 Three scenarios
+ 4 Dynamic programming        8 Benchmarks (writes results.csv)
+ L Load log file              V Validation & indicators
+ T Run self-tests             0 Exit
+> 
+
+Demo complete. Run 'make bench' for benchmarks (writes results.csv).
